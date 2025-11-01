@@ -1,0 +1,10 @@
+eta: 0.02
+grid: 2048
+Qmaj: 5000
+weight:
+  type: gaussian
+  sigma: 0.20
+windows:
+  transition_smoothness: 0.15
+  overlap_max_frac: 0.08
+  width_C: 1.5

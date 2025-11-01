@@ -1,0 +1,14 @@
+name: tesa-meda-twins
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - numpy
+  - scipy
+  - mpmath
+  - pip
+  - pip:
+      - pytest
+  # O seguinte pacote traz o ecossistema Sage completo (em ambientes onde disponível)
+  - sage
