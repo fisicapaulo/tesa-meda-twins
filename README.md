@@ -1,37 +1,55 @@
-# tesa-meda-twins
+# TESA MEDA Twins
+Este repositório contém código e notebooks para estudo e experimentação de sistemas de transferência, observáveis e análise espectral relacionados à abordagem “TESA” (Transfer Operator, Espectro e Sistemas Anisotrópicos) e variações “MEDA Twins”. O projeto inclui implementações de kernels de transferência, testes de coerção, análise de lacuna espectral e exemplos em notebooks Jupyter.
 
-Repositório auditável para a implementação computacional do artigo: TESA/MEDA para primos gêmeos.
+## Conteúdo
+- notebooks/: exemplos práticos
+  - 01_vhl_certificacao.ipynb — Certificação V_HL (variação Hölder/Lipschitz) e preparação de dados
+  - 02_transfer_kernel_tests.ipynb — Testes e visualizações de kernels de transferência
+  - 03_spectrum_gap_alpha0.ipynb — Análise de lacuna espectral (gap) para α=0 (casos base)
+  - 04_coercao_tesa_tiles.ipynb — Experimentos de coerção e “TESA tiles”
+- src/: código-fonte das rotinas principais
+  - anisobanach.py, coercion.py, delta.py, ifbc.py, kernels.py, observables.py, spectrum.py, transfer.py, ttstar.py, vhl.py
+- tests/: testes unitários (pytest) para coercão, espectro e massa da transferência
+- data/: parâmetros e caches auxiliares (params.yaml, primes.cache)
+- environment.yml e requirements.txt: dependências para conda/pip
+- README.md: este arquivo
 
-Estrutura:
-- Certificação numérica de V_HL(2) via produto de Euler truncado, com controle de cauda.
-- Discretização do operador de transferência T_X, renormalização de massa e testes de estabilidade.
-- Espaços anisotrópicos à Gouëzel–Liverani, projeções Littlewood–Paley e quase-diagonalidade.
-- Estimativa espectral periférica (alpha_0), TT* em minor arcs e IFBC em major arcs.
-- Coerção TESA por tiles, forma de Dirichlet global e cálculo de lambda_* e delta.
-
-Ambiente:
+## Instalação rápida
+Opção conda (recomendado):
 1) conda env create -f environment.yml
 2) conda activate tesa-meda-twins
-3) python -m pip install -r requirements.txt   # (opcional: redundante se usar conda)
 
-Pipeline rápido:
-- V_HL(2):        python -m src.vhl --Pmax 100000 --tol 1e-12
-- Kernels:        python -m src.kernels --eta 0.02 --grid 2048
-- Transfer:       python -m src.transfer --eta 0.02 --grid 2048
-- Spectrum:       python -m src.spectrum --eta 0.02 --grid 2048 --maxiter 200
-- TT*:            python -m src.ttstar --eta 0.02 --grid 2048
-- IFBC (major):   python -m src.ifbc --eta 0.02 --Qmaj 5000
-- Coercion:       python -m src.coercion --eta 0.02 --grid 2048
-- Delta:          python -m src.delta --eta 0.02 --grid 2048
+Opção pip:
+1) python -m venv .venv
+2) Ative a venv (Windows: .venv\Scripts\activate | Linux/Mac: source .venv/bin/activate)
+3) pip install -r requirements.txt
 
-Testes:
-- pytest -q
+## Uso básico
+- Executar notebooks:
+  - jupyter lab (ou jupyter notebook)
+  - Abra os arquivos em notebooks/ e rode célula a célula
+- Rodar testes:
+  - pytest -q
 
-Dados:
-- data/primes.cache (opcional): cache de primos e Λ(n).
-- data/params.yaml: parâmetros globais (eta, grid, janelas...).
+## Estrutura conceitual (resumo)
+- Operadores de transferência: modelagem da dinâmica estatística de sistemas; estudo de espectro, medidas invariantes e taxas de mistura
+- Espaços anisotrópicos de Banach: framework para capturar regularidades diferentes em direções distintas
+- Lacuna espectral (spectral gap): separação entre autovalor dominante e restante do espectro, indicando estabilidade e decaimento de correlações
+- Observáveis e kernels: construção de observáveis e kernels para análises numéricas e certificações
 
-Geração do ZIP:
-- Este script Colab já gera tesa-meda-twins.zip automaticamente.
+## Dados e reprodutibilidade
+- Parâmetros padrão em data/params.yaml
+- Alguns resultados/cache em data/primes.cache
+- Para reprodutibilidade, fixe versões via environment.yml ou requirements.txt
 
-Data de geração: 2025-11-01T19:29:13.454434Z
+## Contribuição
+- Issues e PRs são bem-vindos
+- Padrão de código: PEP8
+- Antes de abrir PR, rode: pytest -q
+
+## Licença
+MIT
+
+## Contato
+- Autor/Mantenedor: (Paulo vieira)
+- GitHub: https://github.com/fisicapaulo/tesa-meda-twins
